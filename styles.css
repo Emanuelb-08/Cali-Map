@@ -108,6 +108,142 @@ body {
     color: #666;
 }
 
+/* Credits Button */
+.credits-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+    transition: all 0.3s ease;
+    z-index: 99;
+}
+
+.credits-btn:hover {
+    background-color: #28a745;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #1a2332;
+    padding: 40px;
+    border-radius: 12px;
+    border: 2px solid #28a745;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid rgba(40, 167, 69, 0.3);
+    padding-bottom: 15px;
+}
+
+.modal-header h2 {
+    color: #28a745;
+    font-size: 28px;
+    margin: 0;
+}
+
+.close-btn {
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #dc3545;
+}
+
+.modal-body {
+    color: #d0d0d0;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.modal-body h3 {
+    color: #28a745;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.modal-body ul {
+    list-style: none;
+    margin-left: 0;
+}
+
+.modal-body li {
+    margin-bottom: 10px;
+    word-break: break-all;
+}
+
+.modal-body li a {
+    color: #17a2b8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.modal-body li a:hover {
+    color: #28a745;
+    text-decoration: underline;
+}
+
 /* Hero Section */
 .hero {
     background: linear-gradient(135deg, #001f3f 0%, #003d5c 100%);
@@ -197,6 +333,67 @@ body {
 
 .subsection-image:hover {
     transform: scale(1.02);
+}
+
+/* Map Section Styles */
+.city-map {
+    height: 520px;
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 2px solid rgba(40, 167, 69, 0.7);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    margin: 30px 0 20px;
+}
+
+.map-intro {
+    text-align: center;
+    color: #dfe3e8;
+    font-size: 1.08rem;
+    max-width: 760px;
+    margin: 0 auto 20px;
+}
+
+.map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+.legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 999px;
+    padding: 8px 14px;
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+    background: #0b1622;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.leaflet-popup-content {
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.5;
+    color: #fff;
+}
+
+.leaflet-popup-content strong {
+    color: #28a745;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+    color: #fff;
 }
 
 /* Horizontal Slider Styles */
@@ -379,6 +576,26 @@ body {
         height: 40px;
         font-size: 18px;
     }
+
+    .modal-content {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+
+    .modal-header h2 {
+        font-size: 22px;
+    }
+
+    .modal-body {
+        font-size: 14px;
+    }
+
+    .credits-btn {
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 16px;
+        font-size: 12px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -439,5 +656,29 @@ body {
         width: 36px;
         height: 36px;
         font-size: 16px;
+    }
+
+    .modal-content {
+        padding: 20px 15px;
+        margin: 10px;
+        max-height: 90vh;
+    }
+
+    .modal-header h2 {
+        font-size: 20px;
+    }
+
+    .modal-header {
+        margin-bottom: 20px;
+    }
+
+    .modal-body {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .credits-btn {
+        padding: 8px 14px;
+        font-size: 11px;
     }
 }
