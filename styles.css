@@ -430,8 +430,9 @@ body {
     background: #28a745;
 }
 
+/* Show 3 slides per view by default (accounting for two gaps of 20px between the 3 cards) */
 .slide {
-    min-width: 400px;
+    flex: 0 0 calc((100% - 40px) / 3);
     background: linear-gradient(135deg, #001f3f, #003d5c);
     border-radius: 8px;
     overflow: hidden;
@@ -532,7 +533,19 @@ body {
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+    /* Keep 3 per view on larger tablets */
+    .slide {
+        flex: 0 0 calc((100% - 40px) / 3);
+    }
+}
+
 @media (max-width: 768px) {
+    /* Show 2 slides per view on medium screens */
+    .slide {
+        flex: 0 0 calc((100% - 20px) / 2);
+    }
+
     .nav-links {
         gap: 15px;
         font-size: 14px;
@@ -553,10 +566,6 @@ body {
 
     .subsection-title {
         font-size: 22px;
-    }
-
-    .slide {
-        min-width: 350px;
     }
 
     .slide-content {
@@ -632,8 +641,10 @@ body {
         font-size: 18px;
     }
 
+    /* single slide on small devices */
     .slide {
         min-width: 90vw;
+        flex: 0 0 90vw;
     }
 
     .slide-image {
