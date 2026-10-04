@@ -404,7 +404,6 @@ body {
     background-color: #1a2332;
 }
 
-/* Make each slider show exactly 2 slides per view on wider screens by using flex-basis */
 .slider-container {
     display: flex;
     gap: 20px;
@@ -414,9 +413,25 @@ body {
     scroll-snap-type: x mandatory;
 }
 
-/* Force slides to take up 50% of the visible container minus the gap */
+.slider-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.slider-container::-webkit-scrollbar-track {
+    background: #0f1419;
+}
+
+.slider-container::-webkit-scrollbar-thumb {
+    background: #dc3545;
+    border-radius: 4px;
+}
+
+.slider-container::-webkit-scrollbar-thumb:hover {
+    background: #28a745;
+}
+
 .slide {
-    flex: 0 0 calc((100% - 20px) / 2);
+    min-width: 400px;
     background: linear-gradient(135deg, #001f3f, #003d5c);
     border-radius: 8px;
     overflow: hidden;
@@ -517,13 +532,6 @@ body {
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
-    /* keep 2 per view on tablets/larger phones */
-    .slide {
-        flex: 0 0 calc((100% - 20px) / 2);
-    }
-}
-
 @media (max-width: 768px) {
     .nav-links {
         gap: 15px;
@@ -547,10 +555,8 @@ body {
         font-size: 22px;
     }
 
-    /* On smaller screens show only 1 slide per view */
     .slide {
-        flex: 0 0 90vw;
-        min-width: 90vw;
+        min-width: 350px;
     }
 
     .slide-content {
