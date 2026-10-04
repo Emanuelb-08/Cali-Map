@@ -6,6 +6,7 @@
     <title>Tourist Navigation Map of Cali</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -17,6 +18,7 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#iconic-places" data-en="Iconic Places" data-es="Lugares Icónicos">Iconic Places</a></li>
+                <li><a href="#map-section" data-en="Map" data-es="Mapa">Map</a></li>
                 <li><a href="#experiences" data-en="Experiences" data-es="Experiencias">Experiences</a></li>
                 <li><a href="#events" data-en="Events" data-es="Eventos">Events</a></li>
                 <li><a href="#gastronomy" data-en="Gastronomy" data-es="Gastronomía">Gastronomy</a></li>
@@ -127,8 +129,33 @@
         </div>
     </section>
 
+    <!-- Map Section -->
+    <section id="map-section" class="main-section alternate-bg">
+        <h2 class="section-title" data-en="Interactive Map of Cali" data-es="Mapa Interactivo de Cali">Interactive Map of Cali</h2>
+        <p class="map-intro" data-en="Explore the locations of all iconic places and experiences across Santiago de Cali" data-es="Explora las ubicaciones de todos los lugares icónicos y experiencias en Santiago de Cali">Explore the locations of all iconic places and experiences across Santiago de Cali</p>
+        <div id="map" class="city-map"></div>
+        <div class="map-legend">
+            <div class="legend-item">
+                <i class="fas fa-building" style="color: #dc3545;"></i>
+                <span data-en="Edifications" data-es="Edificaciones">Edifications</span>
+            </div>
+            <div class="legend-item">
+                <i class="fas fa-trees" style="color: #28a745;"></i>
+                <span data-en="Parks" data-es="Parques">Parks</span>
+            </div>
+            <div class="legend-item">
+                <i class="fas fa-landmark" style="color: #ffc107;"></i>
+                <span data-en="Locations" data-es="Ubicaciones">Locations</span>
+            </div>
+            <div class="legend-item">
+                <i class="fas fa-mountain" style="color: #17a2b8;"></i>
+                <span data-en="Viewpoints" data-es="Miradores">Viewpoints</span>
+            </div>
+        </div>
+    </section>
+
     <!-- Section 2: Experiences -->
-    <section id="experiences" class="main-section alternate-bg">
+    <section id="experiences" class="main-section">
         <h2 class="section-title" data-en="Experiences" data-es="Experiencias">Experiences</h2>
         
         <!-- Subsection: Locations -->
@@ -408,6 +435,7 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
