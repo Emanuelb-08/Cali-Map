@@ -71,12 +71,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const content = slide.querySelector('.slide-content');
         if (!content) return;
 
-        const toggleExpanded = () => {
-            const isExpanded = slide.classList.toggle('is-expanded');
-            content.setAttribute('aria-hidden', String(!isExpanded));
-            slide.setAttribute('aria-expanded', String(isExpanded));
-        };
-
         slide.setAttribute('tabindex', '0');
         slide.setAttribute('role', 'button');
         slide.setAttribute('aria-expanded', 'false');
@@ -88,10 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const clickedImage = event.target.closest('img');
             if (clickedImage) {
                 openImageModal(clickedImage);
-                return;
             }
-
-            toggleExpanded();
         });
 
         slide.addEventListener('keydown', (event) => {
@@ -100,9 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const clickedImage = slide.querySelector('img');
                 if (clickedImage) {
                     openImageModal(clickedImage);
-                    return;
                 }
-                toggleExpanded();
             }
         });
     });
@@ -279,15 +268,3 @@ function initMap() {
 
     applyMapFilter('all');
 }
-
-
-
-
-
-
-
-
-
-
-
-
