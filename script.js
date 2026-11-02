@@ -1,3 +1,174 @@
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.main-section').forEach((section) => {
+        const subsections = Array.from(section.children).filter((child) => child.classList.contains('subsection'));
+
+        if (!subsections.length) return;
+
+        if (!section.querySelector('.subsections-grid')) {
+            const grid = document.createElement('div');
+            grid.className = 'subsections-grid';
+            subsections.forEach((subsection) => grid.appendChild(subsection));
+            section.appendChild(grid);
+        }
+    });
+
+    document.querySelectorAll('.subsection').forEach((subsection, index) => {
+        const title = subsection.querySelector('.subsection-title');
+        if (!title) return;
+
+        if (index === 0) {
+            subsection.classList.add('is-open');
+        }
+
+        title.setAttribute('aria-expanded', String(subsection.classList.contains('is-open')));
+
+        title.addEventListener('click', () => {
+            const section = subsection.closest('.main-section');
+            if (!section) return;
+
+            const sectionCards = section.querySelectorAll('.subsection');
+            const isAlreadyOpen = subsection.classList.contains('is-open');
+
+            sectionCards.forEach((card) => {
+                const shouldOpen = !isAlreadyOpen && card === subsection;
+                card.classList.toggle('is-open', shouldOpen);
+                const trigger = card.querySelector('.subsection-title');
+                if (trigger) {
+                    trigger.setAttribute('aria-expanded', String(shouldOpen));
+                }
+            });
+        });
+    });
+
+    const imageModal = document.getElementById('image-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalCaption = document.getElementById('modal-title');
+
+    function openImageModal(imageElement) {
+        if (!imageModal || !modalImage || !modalCaption || !imageElement) return;
+
+        const slide = imageElement.closest('.slide');
+        const title = slide?.querySelector('h4')?.textContent || imageElement.alt || 'Experience image';
+
+        modalImage.src = imageElement.src;
+        modalImage.alt = imageElement.alt;
+        modalCaption.textContent = title;
+        imageModal.classList.add('is-open');
+        imageModal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+    }
+
+    function closeImageModal() {
+        if (!imageModal || !modalImage) return;
+
+        imageModal.classList.remove('is-open');
+        imageModal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        modalImage.src = '';
+        modalImage.alt = '';
+        if (modalCaption) modalCaption.textContent = '';
+    }
+
+    document.querySelectorAll('.slide').forEach((slide) => {
+        const content = slide.querySelector('.slide-content');
+        if (!content) return;
+
+        slide.setAttribute('tabindex', '0');
+        slide.setAttribute('role', 'button');
+        slide.setAttribute('aria-expanded', 'false');
+        content.setAttribute('aria-hidden', 'true');
+
+        slide.addEventListener('click', (event) => {
+            if (event.target.closest('.slide-btn')) return;
+
+            const clickedImage = event.target.closest('img');
+            if (clickedImage) {
+                openImageModal(clickedImage);
+            }
+        });
+
+        slide.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                const clickedImage = slide.querySelector('img');
+                if (clickedImage) {
+                    openImageModal(clickedImage);
+                }
+            }
+        });
+    });
+
+    if (imageModal) {
+        imageModal.addEventListener('click', (event) => {
+            if (event.target === imageModal) closeImageModal();
+        });
+
+        const closeButton = imageModal.querySelector('.image-modal-close');
+        if (closeButton) {
+            closeButton.addEventListener('click', closeImageModal);
+        }
+    }
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && imageModal?.classList.contains('is-open')) {
+            closeImageModal();
+        }
+    });
+
+    setupLanguageSwitcher();
+    initMap();
+});
+
+function scrollSlide(event, direction) {
+    if (event) {
+        event.preventDefault();
+    }
+
+    const trigger = event && event.currentTarget ? event.currentTarget : null;
+    const slider = trigger ? trigger.closest('.horizontal-slider')?.querySelector('.slider-container') : null;
+    const container = slider || document.querySelector('.slider-container');
+
+    if (!container) return;
+
+    const firstSlide = container.querySelector('.slide');
+    const gap = parseFloat(getComputedStyle(container).gap) || 20;
+    const slideWidth = firstSlide ? firstSlide.getBoundingClientRect().width : 280;
+    const scrollAmount = Math.max(slideWidth + gap, 220);
+
+    container.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'smooth'
+    });
+}
+
+function setupLanguageSwitcher() {
+    const buttons = document.querySelectorAll('.lang-btn');
+    if (!buttons.length) return;
+
+    const applyLanguage = (lang) => {
+        document.querySelectorAll('[data-en][data-es]').forEach((element) => {
+            const value = element.dataset[lang];
+            if (typeof value === 'string' && value.trim()) {
+                element.textContent = value;
+            }
+        });
+
+        buttons.forEach((button) => {
+            const isActive = button.dataset.lang === lang;
+            button.classList.toggle('active', isActive);
+            button.setAttribute('aria-pressed', String(isActive));
+        });
+
+        document.documentElement.lang = lang;
+    };
+
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => applyLanguage(button.dataset.lang));
+    });
+
+    applyLanguage('en');
+}
+
 function initMap() {
     const mapContainer = document.getElementById('map');
     if (!mapContainer || typeof L === 'undefined') return;
