@@ -298,26 +298,69 @@ body {
     border-radius: 2px;
 }
 
-/* Subsection Styles */
-.subsection {
-    margin-bottom: 80px;
+.subsections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    align-items: start;
 }
 
-.subsection:last-child {
+/* Accordion subsection styles */
+.subsection {
     margin-bottom: 0;
+    border: 1px solid rgba(40, 167, 69, 0.25);
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(15, 20, 25, 0.7);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.18);
 }
 
 .subsection-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
     font-size: 32px;
-    color: #28a745;
-    margin-bottom: 15px;
+    color: #fff;
     font-weight: 600;
+    margin: 0;
+    padding: 20px 22px;
+    background: linear-gradient(135deg, rgba(0,31,63,0.95), rgba(0,61,92,0.9));
+    border: none;
+    text-align: left;
+    transition: background 0.3s ease;
+}
+
+.subsection-title::after {
+    content: '+';
+    font-size: 28px;
+    color: #28a745;
+    line-height: 1;
+    margin-left: 12px;
+}
+
+.subsection.is-open .subsection-title {
+    background: linear-gradient(135deg, rgba(0, 61, 92, 1), rgba(40, 167, 69, 0.32));
+}
+
+.subsection.is-open .subsection-title::after {
+    content: '−';
+}
+
+.subsection > *:not(.subsection-title) {
+    display: none;
+}
+
+.subsection.is-open > *:not(.subsection-title) {
+    display: block;
 }
 
 .subsection-intro {
     font-size: 18px;
     color: #b0b0b0;
-    margin-bottom: 20px;
+    margin: 0;
+    padding: 20px 22px 10px;
     max-width: 700px;
 }
 
@@ -326,9 +369,11 @@ body {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
-    margin-bottom: 40px;
+    margin: 0 auto 18px;
     box-shadow: 0 8px 20px rgba(220, 53, 69, 0.2);
     transition: transform 0.3s ease;
+    display: block;
+    padding: 0 22px;
 }
 
 .subsection-image:hover {
@@ -402,6 +447,7 @@ body {
     overflow: hidden;
     border-radius: 12px;
     background-color: #1a2332;
+    margin: 0 22px 22px;
 }
 
 .slider-container {
@@ -430,7 +476,6 @@ body {
     background: #28a745;
 }
 
-/* Show 3 slides per view by default (accounting for two gaps of 20px between the 3 cards) */
 .slide {
     flex: 0 0 calc((100% - 40px) / 3);
     background: linear-gradient(135deg, #001f3f, #003d5c);
@@ -480,7 +525,6 @@ body {
     line-height: 1.6;
 }
 
-/* Slider Navigation Buttons */
 .slide-btn {
     position: absolute;
     top: 50%;
