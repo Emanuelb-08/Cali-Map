@@ -27,8 +27,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!section) return;
 
             const sectionCards = section.querySelectorAll('.subsection');
+            const isAlreadyOpen = subsection.classList.contains('is-open');
+
             sectionCards.forEach((card) => {
-                const shouldOpen = card === subsection;
+                const shouldOpen = !isAlreadyOpen && card === subsection;
                 card.classList.toggle('is-open', shouldOpen);
                 const trigger = card.querySelector('.subsection-title');
                 if (trigger) {
