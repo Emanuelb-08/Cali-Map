@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function setLanguage(lang) {
         document.documentElement.lang = lang;
-        
+
         // Update all elements with data-en and data-es attributes
         document.querySelectorAll('[data-en][data-es]').forEach(element => {
             if (lang === 'es') {
@@ -28,6 +28,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 element.textContent = element.getAttribute('data-en');
             }
         });
+
+        // Update map labels and popups if the map has already been initialized
+        if (window.mapInstance) {
+            renderMapMarkers(lang);
+        }
     }
 
     function updateButtonStates() {
@@ -82,7 +87,7 @@ function scrollSlide(event, direction) {
     const slider = button.closest('.horizontal-slider');
     const container = slider.querySelector('.slider-container');
     const slideWidth = container.querySelector('.slide').offsetWidth + 20; // Including gap
-    
+
     container.scrollBy({
         left: direction * slideWidth,
         behavior: 'smooth'
@@ -109,76 +114,112 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Map initialization with Leaflet
 const caliPoints = [
     {
-        name: "Simón Bolívar Monument",
-        category: "Edifications",
+        name: { en: "Simón Bolívar Monument", es: "Monumento a Simón Bolívar" },
+        category: { en: "Edifications", es: "Edificaciones" },
         coords: [3.4388, -76.5215],
-        description: "Historic monument in the CAM plaza."
+        description: {
+            en: "Historic monument in the CAM plaza.",
+            es: "Monumento histórico en la plaza del CAM."
+        }
     },
     {
-        name: "La Ermita",
-        category: "Edifications",
+        name: { en: "La Ermita", es: "La Ermita" },
+        category: { en: "Edifications", es: "Edificaciones" },
         coords: [3.4313, -76.5273],
-        description: "Historic church near the Cali River."
+        description: {
+            en: "Historic church near the Cali River.",
+            es: "Iglesia histórica cerca del río Cali."
+        }
     },
     {
-        name: "Solidarity Monument",
-        category: "Edifications",
+        name: { en: "Solidarity Monument", es: "Monumento a la Solidaridad" },
+        category: { en: "Edifications", es: "Edificaciones" },
         coords: [3.4317, -76.5156],
-        description: "Cultural sculpture symbolizing Cali's unity."
+        description: {
+            en: "Cultural sculpture symbolizing Cali's unity.",
+            es: "Escultura cultural que simboliza la unidad de Cali."
+        }
     },
     {
-        name: "Plazoleta Jairo Varela",
-        category: "Parks",
+        name: { en: "Plazoleta Jairo Varela", es: "Plazoleta Jairo Varela" },
+        category: { en: "Parks", es: "Parques" },
         coords: [3.4517, -76.5307],
-        description: "Plaza with music, culture and gastronomy."
+        description: {
+            en: "Plaza with music, culture and gastronomy.",
+            es: "Plaza con música, cultura y gastronomía."
+        }
     },
     {
-        name: "Cat Park",
-        category: "Parks",
+        name: { en: "Cat Park", es: "Parque de los Gatos" },
+        category: { en: "Parks", es: "Parques" },
         coords: [3.4449, -76.5616],
-        description: "Urban art and feline-themed park."
+        description: {
+            en: "Urban art and feline-themed park.",
+            es: "Arte urbano y parque temático felino."
+        }
     },
     {
-        name: "Parque Artesanal Loma de La Cruz",
-        category: "Parks",
+        name: { en: "Parque Artesanal Loma de La Cruz", es: "Parque Artesanal Loma de La Cruz" },
+        category: { en: "Parks", es: "Parques" },
         coords: [3.4716, -76.5497],
-        description: "Crafts, culture and local stories."
+        description: {
+            en: "Crafts, culture and local stories.",
+            es: "Artesanías, cultura e historias locales."
+        }
     },
     {
-        name: "Salsa Museum",
-        category: "Locations",
+        name: { en: "Salsa Museum", es: "Museo de la Salsa" },
+        category: { en: "Locations", es: "Ubicaciones" },
         coords: [3.4432, -76.5067],
-        description: "World-famous museum of salsa culture."
+        description: {
+            en: "World-famous museum of salsa culture.",
+            es: "Museo mundialmente reconocido de la cultura de la salsa."
+        }
     },
     {
-        name: "Cali Zoo",
-        category: "Locations",
+        name: { en: "Cali Zoo", es: "Zoológico de Cali" },
+        category: { en: "Locations", es: "Ubicaciones" },
         coords: [3.4432, -76.5598],
-        description: "Nature and biodiversity experience."
+        description: {
+            en: "Nature and biodiversity experience.",
+            es: "Experiencia de naturaleza y biodiversidad."
+        }
     },
     {
-        name: "Caliwood Museum of Cinematography",
-        category: "Locations",
+        name: { en: "Caliwood Museum of Cinematography", es: "Museo de Cinematografía Caliwood" },
+        category: { en: "Locations", es: "Ubicaciones" },
         coords: [3.4012, -76.5536],
-        description: "Museum of filmmaking and cinema heritage."
+        description: {
+            en: "Museum of filmmaking and cinema heritage.",
+            es: "Museo del cine y del patrimonio cinematográfico."
+        }
     },
     {
-        name: "Monumento a Cristo Rey",
-        category: "Viewpoints",
+        name: { en: "Christ the King Monument", es: "Monumento a Cristo Rey" },
+        category: { en: "Viewpoints", es: "Miradores" },
         coords: [3.4367, -76.5662],
-        description: "Panoramic city viewpoint and monument."
+        description: {
+            en: "Panoramic city viewpoint and monument.",
+            es: "Mirador panorámico de la ciudad y monumento."
+        }
     },
     {
-        name: "Sebastián de Belalcázar Viewpoint",
-        category: "Viewpoints",
+        name: { en: "Sebastián de Belalcázar Viewpoint", es: "Mirador Sebastián de Belalcázar" },
+        category: { en: "Viewpoints", es: "Miradores" },
         coords: [3.4480, -76.5302],
-        description: "Historical viewpoint with city views."
+        description: {
+            en: "Historical viewpoint with city views.",
+            es: "Mirador histórico con vistas de la ciudad."
+        }
     },
     {
-        name: "Cerro de las Tres Cruces",
-        category: "Viewpoints",
+        name: { en: "Cerro de las Tres Cruces", es: "Cerro de las Tres Cruces" },
+        category: { en: "Viewpoints", es: "Miradores" },
         coords: [3.4568, -76.5483],
-        description: "Iconic monument and broad panoramic view."
+        description: {
+            en: "Iconic monument and broad panoramic view.",
+            es: "Monumento icónico con una amplia vista panorámica."
+        }
     }
 ];
 
@@ -189,29 +230,48 @@ const categoryColors = {
     Viewpoints: "#17a2b8"
 };
 
+let mapInstance = null;
+let mapMarkers = [];
+
+function renderMapMarkers(lang = localStorage.getItem('language') || 'en') {
+    if (!mapInstance) return;
+
+    mapMarkers.forEach((marker) => mapInstance.removeLayer(marker));
+    mapMarkers = [];
+
+    caliPoints.forEach((place) => {
+        const localizedName = place.name[lang] || place.name.en;
+        const localizedCategory = place.category[lang] || place.category.en;
+        const localizedDescription = place.description[lang] || place.description.en;
+        const baseCategoryKey = place.category.en;
+
+        const marker = L.circleMarker(place.coords, {
+            radius: 9,
+            color: "#ffffff",
+            weight: 1.5,
+            fillColor: categoryColors[baseCategoryKey] || "#6c757d",
+            fillOpacity: 0.9
+        }).addTo(mapInstance);
+
+        marker.bindPopup(`
+            <strong>${localizedName}</strong><br>
+            <em>${localizedCategory}</em><br>
+            ${localizedDescription}
+        `);
+
+        mapMarkers.push(marker);
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     const mapElement = document.getElementById("map");
     if (mapElement) {
-        const map = L.map("map").setView([3.4516, -76.5319], 12);
+        mapInstance = L.map("map").setView([3.4516, -76.5319], 12);
 
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             attribution: "&copy; OpenStreetMap contributors"
-        }).addTo(map);
+        }).addTo(mapInstance);
 
-        caliPoints.forEach((place) => {
-            const marker = L.circleMarker(place.coords, {
-                radius: 9,
-                color: "#ffffff",
-                weight: 1.5,
-                fillColor: categoryColors[place.category] || "#6c757d",
-                fillOpacity: 0.9
-            }).addTo(map);
-
-            marker.bindPopup(`
-                <strong>${place.name}</strong><br>
-                <em>${place.category}</em><br>
-                ${place.description}
-            `);
-        });
+        renderMapMarkers(localStorage.getItem('language') || 'en');
     }
 });
