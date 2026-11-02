@@ -1,4 +1,37 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const subsectionImageCaptions = [
+        'Section 1 – Subsection 1: Cali tower – Torre de Cali',
+        'Section 1 – Subsection 2: Tejada Cat, Cat park – Gato de Tejada, Parque del Gato',
+        'Section 2 – Subsection 1: Cali Zoo – Zoológico de Cali',
+        'Section 2 – Subsection 2: Christ the King Monument – Monumento a Cristo Rey',
+        'Section 3 – Subsection 1: Cali Fair (2025) – Feria de Cali (2025)',
+        'Section 3 – Subsection 2: World Salsa Festival (2025) – Festival Mundial de la Salsa (2025)',
+        'Section 4 – Subsection 1: Empanadas, typical Cali food – Empanadas, comida típica de Cali',
+        'Section 4 – Subsection 2: Cocada, typical Cali sweet – Cocada, dulce típico de Cali'
+    ];
+
+    const captionStyle = document.createElement('style');
+    captionStyle.textContent = `
+        .subsection-image-caption {
+            margin: -8px 20px 16px;
+            color: #b0b0b0;
+            font-size: 0.875rem;
+            line-height: 1.4;
+            text-align: center;
+        }
+    `;
+    document.head.appendChild(captionStyle);
+
+    document.querySelectorAll('.subsection-image').forEach((image, index) => {
+        const captionText = subsectionImageCaptions[index];
+        if (!captionText) return;
+
+        const caption = document.createElement('p');
+        caption.className = 'subsection-image-caption';
+        caption.textContent = captionText;
+        image.insertAdjacentElement('afterend', caption);
+    });
+
     document.querySelectorAll('.main-section').forEach((section) => {
         const subsections = Array.from(section.children).filter((child) => child.classList.contains('subsection'));
 
