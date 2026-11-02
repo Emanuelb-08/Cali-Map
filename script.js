@@ -38,6 +38,34 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    document.querySelectorAll('.slide').forEach((slide) => {
+        const content = slide.querySelector('.slide-content');
+        if (!content) return;
+
+        const toggleExpanded = () => {
+            const isExpanded = slide.classList.toggle('is-expanded');
+            content.setAttribute('aria-hidden', String(!isExpanded));
+            slide.setAttribute('aria-expanded', String(isExpanded));
+        };
+
+        slide.setAttribute('tabindex', '0');
+        slide.setAttribute('role', 'button');
+        slide.setAttribute('aria-expanded', 'false');
+        content.setAttribute('aria-hidden', 'true');
+
+        slide.addEventListener('click', (event) => {
+            if (event.target.closest('.slide-btn')) return;
+            toggleExpanded();
+        });
+
+        slide.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                toggleExpanded();
+            }
+        });
+    });
+
     setupLanguageSwitcher();
     initMap();
 });
