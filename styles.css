@@ -300,48 +300,54 @@ body {
 
 .subsections-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 22px;
     align-items: start;
 }
 
-/* Accordion subsection styles */
+/* subsection cards */
 .subsection {
-    margin-bottom: 0;
-    border: 1px solid rgba(40, 167, 69, 0.25);
-    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(0,31,63,0.88), rgba(15,20,25,0.94));
+    border: 1px solid rgba(40, 167, 69, 0.28);
+    border-radius: 18px;
     overflow: hidden;
-    background: rgba(15, 20, 25, 0.7);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+.subsection:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(40,167,69,0.16);
 }
 
 .subsection-title {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
-    cursor: pointer;
-    font-size: 32px;
-    color: #fff;
-    font-weight: 600;
-    margin: 0;
-    padding: 20px 22px;
-    background: linear-gradient(135deg, rgba(0,31,63,0.95), rgba(0,61,92,0.9));
+    gap: 10px;
+    background: linear-gradient(135deg, #001f3f, #003d5c);
     border: none;
+    color: #fff;
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    font-weight: 600;
     text-align: left;
-    transition: background 0.3s ease;
+    padding: 18px 20px;
+    cursor: pointer;
+    margin: 0;
+    transition: background 0.2s ease;
 }
 
 .subsection-title::after {
     content: '+';
-    font-size: 28px;
+    font-size: 1.8rem;
     color: #28a745;
     line-height: 1;
-    margin-left: 12px;
+    flex-shrink: 0;
 }
 
 .subsection.is-open .subsection-title {
-    background: linear-gradient(135deg, rgba(0, 61, 92, 1), rgba(40, 167, 69, 0.32));
+    background: linear-gradient(135deg, rgba(0,61,92,1), rgba(40,167,69,0.28));
 }
 
 .subsection.is-open .subsection-title::after {
@@ -357,27 +363,21 @@ body {
 }
 
 .subsection-intro {
-    font-size: 18px;
+    font-size: 1rem;
     color: #b0b0b0;
     margin: 0;
-    padding: 20px 22px 10px;
+    padding: 18px 20px 10px;
     max-width: 700px;
 }
 
 .subsection-image {
-    width: 100%;
+    width: calc(100% - 40px);
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
-    margin: 0 auto 18px;
-    box-shadow: 0 8px 20px rgba(220, 53, 69, 0.2);
-    transition: transform 0.3s ease;
     display: block;
-    padding: 0 22px;
-}
-
-.subsection-image:hover {
-    transform: scale(1.02);
+    margin: 0 auto 16px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(220, 53, 69, 0.2);
 }
 
 /* Map Section Styles */
@@ -447,7 +447,7 @@ body {
     overflow: hidden;
     border-radius: 12px;
     background-color: #1a2332;
-    margin: 0 22px 22px;
+    margin: 0 20px 20px;
 }
 
 .slider-container {
@@ -607,7 +607,7 @@ body {
     }
 
     .subsection-title {
-        font-size: 22px;
+        font-size: 1.5rem;
     }
 
     .slide-content {
@@ -710,7 +710,7 @@ body {
     }
 
     .subsection-title {
-        font-size: 18px;
+        font-size: 1.1rem;
     }
 
     .slide {
@@ -764,3 +764,4 @@ body {
         font-size: 11px;
     }
 }
+
