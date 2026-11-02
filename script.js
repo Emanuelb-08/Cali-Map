@@ -115,14 +115,19 @@ function initMap() {
     };
 
     const points = [
+        { name: 'Torre de Cali', coords: [3.4488, -76.5288], category: 'edifications', type: 'Edificación' },
         { name: 'Monumento a Simón Bolívar', coords: [3.4560, -76.5323], category: 'edifications', type: 'Edificación' },
         { name: 'La Ermita', coords: [3.4414, -76.5339], category: 'edifications', type: 'Edificación' },
+        { name: 'Monumento a la Solidaridad', coords: [3.4461, -76.5320], category: 'edifications', type: 'Edificación' },
         { name: 'Plazoleta Jairo Varela', coords: [3.4569, -76.5352], category: 'parks', type: 'Parque' },
         { name: 'Parque de los Gatos', coords: [3.4320, -76.5471], category: 'parks', type: 'Parque' },
+        { name: 'Parque Artesanal Loma de la Cruz', coords: [3.4705, -76.5480], category: 'parks', type: 'Parque' },
         { name: 'Museo de la Salsa', coords: [3.4476, -76.5388], category: 'locations', type: 'Lugar' },
         { name: 'Zoológico de Cali', coords: [3.4610, -76.5450], category: 'locations', type: 'Lugar' },
-        { name: 'Cristo Rey', coords: [3.4328, -76.5451], category: 'viewpoints', type: 'Mirador' },
-        { name: 'Mirador Sebastián de Belalcázar', coords: [3.4356, -76.5319], category: 'viewpoints', type: 'Mirador' }
+        { name: 'Museo Caliwood', coords: [3.4590, -76.5392], category: 'locations', type: 'Lugar' },
+        { name: 'Monumento a Cristo Rey', coords: [3.4328, -76.5451], category: 'viewpoints', type: 'Mirador' },
+        { name: 'Mirador Sebastián de Belalcázar', coords: [3.4356, -76.5319], category: 'viewpoints', type: 'Mirador' },
+        { name: 'Cerro de las Tres Cruces', coords: [3.4487, -76.5317], category: 'viewpoints', type: 'Mirador' }
     ];
 
     const markers = [];
@@ -136,8 +141,7 @@ function initMap() {
             weight: 2,
             fillColor: color,
             fillOpacity: 0.9,
-            category,
-            pane: 'markerPane'
+            category
         }).addTo(map);
 
         marker.bindPopup(`
