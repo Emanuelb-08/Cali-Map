@@ -180,12 +180,12 @@ function setupLanguageSwitcher() {
 
     const experienceDescriptions = [
         {
-            en: 'El monumento a Simón Bolívar es una escultura peatonal ubicada en la plazoleta del Centro Administrativo Municipal (CAM), en la calle 12 con avenida 3 Norte, Paseo Bolívar, Cali.',
-            es: 'El monumento a Simón Bolívar es una escultura peatonal ubicada en la plazoleta del Centro Administrativo Municipal (CAM), en la calle 12 con avenida 3 Norte, Paseo Bolívar, Cali.'
+            en: 'The monument to Simón Bolívar is a pedestrian sculpture located in the plaza of the Municipal Administrative Center (CAM) at 12th Street with 3rd North Avenue, Bolívar Promenade, Cali.',
+            es: 'El monumento a Simón Bolívar es una escultura peatonal ubicada en la plaza del Centro Administrativo Municipal (CAM) en la calle 12 con avenida 3 Norte, Paseo Bolívar, Cali.'
         },
         {
             en: 'La Ermita Church is a Catholic temple built near the Cali River, dedicated to the Lord of the Cane and Our Lady of the Conception. You can find it on 13th Street with 4th Avenue, Cali.',
-            es: 'La iglesia La Ermita es un templo católico construido cerca del río Cali, dedicado al Señor de la Caña y a Nuestra Señora de la Concepción. Se encuentra en la calle 13 con carrera 4, Cali.'
+            es: 'La iglesia La Ermita es un templo católico construido cerca del río Cali, dedicado al Señor de la Caña y a Nuestra Señora de la Concepción. Se encuentra en la calle 13 con avenida 4, Cali.'
         },
         {
             en: 'The Solidarity Monument is a sculpture inaugurated in 1995, symbolizing unity and collective spirit. You can find it on 3rd North Avenue with 34th Street, Cali.',
