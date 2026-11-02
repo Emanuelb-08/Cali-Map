@@ -38,6 +38,35 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    const imageModal = document.getElementById('image-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalCaption = document.getElementById('modal-title');
+
+    function openImageModal(imageElement) {
+        if (!imageModal || !modalImage || !modalCaption || !imageElement) return;
+
+        const slide = imageElement.closest('.slide');
+        const title = slide?.querySelector('h4')?.textContent || imageElement.alt || 'Experience image';
+
+        modalImage.src = imageElement.src;
+        modalImage.alt = imageElement.alt;
+        modalCaption.textContent = title;
+        imageModal.classList.add('is-open');
+        imageModal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+    }
+
+    function closeImageModal() {
+        if (!imageModal || !modalImage) return;
+
+        imageModal.classList.remove('is-open');
+        imageModal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        modalImage.src = '';
+        modalImage.alt = '';
+        if (modalCaption) modalCaption.textContent = '';
+    }
+
     document.querySelectorAll('.slide').forEach((slide) => {
         const content = slide.querySelector('.slide-content');
         if (!content) return;
@@ -55,15 +84,44 @@ document.addEventListener('DOMContentLoaded', function () {
 
         slide.addEventListener('click', (event) => {
             if (event.target.closest('.slide-btn')) return;
+
+            const clickedImage = event.target.closest('img');
+            if (clickedImage) {
+                openImageModal(clickedImage);
+                return;
+            }
+
             toggleExpanded();
         });
 
         slide.addEventListener('keydown', (event) => {
             if (event.key === 'Enter' || event.key === ' ') {
                 event.preventDefault();
+                const clickedImage = slide.querySelector('img');
+                if (clickedImage) {
+                    openImageModal(clickedImage);
+                    return;
+                }
                 toggleExpanded();
             }
         });
+    });
+
+    if (imageModal) {
+        imageModal.addEventListener('click', (event) => {
+            if (event.target === imageModal) closeImageModal();
+        });
+
+        const closeButton = imageModal.querySelector('.image-modal-close');
+        if (closeButton) {
+            closeButton.addEventListener('click', closeImageModal);
+        }
+    }
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && imageModal?.classList.contains('is-open')) {
+            closeImageModal();
+        }
     });
 
     setupLanguageSwitcher();
@@ -221,3 +279,15 @@ function initMap() {
 
     applyMapFilter('all');
 }
+
+
+
+
+
+
+
+
+
+
+
+
