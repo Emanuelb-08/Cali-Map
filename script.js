@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
     const subsectionImageCaptions = [
-        'Section 1 – Subsection 1: Cali tower – Torre de Cali',
-        'Section 1 – Subsection 2: Tejada Cat, Cat park – Gato de Tejada, Parque del Gato',
-        'Section 2 – Subsection 1: Cali Zoo – Zoológico de Cali',
-        'Section 2 – Subsection 2: Christ the King Monument – Monumento a Cristo Rey',
-        'Section 3 – Subsection 1: Cali Fair (2025) – Feria de Cali (2025)',
-        'Section 3 – Subsection 2: World Salsa Festival (2025) – Festival Mundial de la Salsa (2025)',
-        'Section 4 – Subsection 1: Empanadas, typical Cali food – Empanadas, comida típica de Cali',
-        'Section 4 – Subsection 2: Cocada, typical Cali sweet – Cocada, dulce típico de Cali'
+        'Cali tower – Torre de Cali',
+        'Tejada Cat, Cat park – Gato de Tejada, Parque del Gato',
+        'Cali Zoo – Zoológico de Cali',
+        'Christ the King Monument – Monumento a Cristo Rey',
+        'Cali Fair (2025) – Feria de Cali (2025)',
+        'World Salsa Festival (2025) – Festival Mundial de la Salsa (2025)',
+        'Empanadas, typical Cali food – Empanadas, comida típica de Cali',
+        'Cocada, typical Cali sweet – Cocada, dulce típico de Cali'
     ];
 
     const captionStyle = document.createElement('style');
