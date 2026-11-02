@@ -178,6 +178,92 @@ function setupLanguageSwitcher() {
     const buttons = document.querySelectorAll('.lang-btn');
     if (!buttons.length) return;
 
+    const experienceDescriptions = [
+        {
+            en: 'El monumento a Simón Bolívar es una escultura peatonal ubicada en la plazoleta del Centro Administrativo Municipal (CAM), en la calle 12 con avenida 3 Norte, Paseo Bolívar, Cali.',
+            es: 'El monumento a Simón Bolívar es una escultura peatonal ubicada en la plazoleta del Centro Administrativo Municipal (CAM), en la calle 12 con avenida 3 Norte, Paseo Bolívar, Cali.'
+        },
+        {
+            en: 'La Ermita Church is a Catholic temple built near the Cali River, dedicated to the Lord of the Cane and Our Lady of the Conception. You can find it on 13th Street with 4th Avenue, Cali.',
+            es: 'La iglesia La Ermita es un templo católico construido cerca del río Cali, dedicado al Señor de la Caña y a Nuestra Señora de la Concepción. Se encuentra en la calle 13 con carrera 4, Cali.'
+        },
+        {
+            en: 'The Solidarity Monument is a sculpture inaugurated in 1995, symbolizing unity and collective spirit. You can find it on 3rd North Avenue with 34th Street, Cali.',
+            es: 'El Monumento a la Solidaridad es una escultura inaugurada en 1995 que simboliza la unidad y el espíritu colectivo. Se encuentra en la avenida 3 Norte con calle 34, Cali.'
+        },
+        {
+            en: "Jairo Varela Plaza is an urban space enriched with gastronomy and tribute to the city's music culture. You can find it on Avenue 2 North, #10 North-1 to 10 North-75, Cali.",
+            es: 'La Plazoleta Jairo Varela es un espacio urbano enriquecido con gastronomía y un homenaje a la cultura musical de la ciudad. Se encuentra en la avenida 2 Norte, #10 Norte-1 a 10 Norte-75, Cali.'
+        },
+        {
+            en: "Cat Park's main attraction is the Tejada Cat, with cats throughout the park and urban art around the area. The address of Cat Park in Cali is 3 West-2 to 3, Av. 4 West #West-190.",
+            es: 'La principal atracción del Parque del Gato es el Gato de Tejada, junto con esculturas de gatos por todo el parque y arte urbano en los alrededores. La dirección del Parque del Gato en Cali es 3 Oeste-2 a 3, av. 4 Oeste #Oeste-190.'
+        },
+        {
+            en: 'At Parque Artesanal Loma de La Cruz, you can enjoy cultural shows weekly and artisan crafts. You can find it on 5th Street, between 16th and 16A Avenues, in commune 3, Cali.',
+            es: 'En el Parque Artesanal Loma de La Cruz puedes disfrutar de espectáculos culturales semanales y artesanías. Se encuentra en la calle 5, entre las carreras 16 y 16A, en la comuna 3 de Cali.'
+        },
+        {
+            en: 'The Salsa Museum gathers and displays the musical culture and history of salsa both globally and in Cali. You can find it on 11b Street #24 - 44, Cali.',
+            es: 'El Museo de la Salsa reúne y exhibe la cultura musical y la historia de la salsa, tanto a nivel mundial como en Cali. Se encuentra en la calle 11B #24-44, Cali.'
+        },
+        {
+            en: 'At the Cali Zoo, you can explore trails full of nature and reconnect with biodiversity. You can find the entrance on 2nd West Avenue with 14th Street, in the Santa Teresita neighborhood, Cali.',
+            es: 'En el Zoológico de Cali puedes recorrer senderos llenos de naturaleza y reconectar con la biodiversidad. La entrada está en la avenida 2 Oeste con calle 14, en el barrio Santa Teresita, Cali.'
+        },
+        {
+            en: "Caliwood is the first Museum of Cinematography in Colombia's history, founded in 2008. You can find it on 2 West Street #5a 55, Cali.",
+            es: 'Caliwood es el primer museo de cinematografía de la historia de Colombia, fundado en 2008. Se encuentra en la calle 2 Oeste #5A-55, Cali.'
+        },
+        {
+            en: "The Christ the King Monument was inaugurated in 1953 and is one of the city's most iconic landmarks. You can find it in Santa Rita, Cali.",
+            es: 'El Monumento a Cristo Rey fue inaugurado en 1953 y es uno de los lugares más emblemáticos de la ciudad. Se encuentra en Santa Rita, Cali.'
+        },
+        {
+            en: 'This viewpoint offers panoramic views of the city and a historic monument of Belalcázar. You can find it on 3rd West Avenue with 9th West Street, Cali.',
+            es: 'Este mirador ofrece vistas panorámicas de la ciudad y un monumento histórico a Belalcázar. Se encuentra en la avenida 3 Oeste con calle 9 Oeste, Cali.'
+        },
+        {
+            en: 'The Hill of the Three Crosses is a landmark with three crosses and a broad city overlook. You can find it on 9th North Avenue at 12th North Street, Cali.',
+            es: 'El Cerro de las Tres Cruces es un lugar emblemático con tres cruces y una amplia vista de la ciudad. Se encuentra en la avenida 9 Norte con calle 12 Norte, Cali.'
+        },
+        {
+            en: 'The International Book Fair is held annually between October and November in Cali and brings together readers and authors from across the region.',
+            es: 'La Feria Internacional del Libro se celebra anualmente entre octubre y noviembre en Cali y reúne a lectores y autores de toda la región.'
+        },
+        {
+            en: 'The Cali Fair is an annual event held between December 25 and 30, celebrating culture, music, and tradition in the city.',
+            es: 'La Feria de Cali es un evento anual que se celebra entre el 25 y el 30 de diciembre para celebrar la cultura, la música y la tradición de la ciudad.'
+        },
+        {
+            en: 'At the Cali International Film Fair, cultural and cinematic diversity is celebrated. This event is held annually between October and December.',
+            es: 'En el Festival Internacional de Cine de Cali se celebra la diversidad cultural y cinematográfica. Este evento se realiza anualmente entre octubre y diciembre.'
+        },
+        {
+            en: "At the Petronio Álvarez Festival, many artists gather to celebrate the region's musical heritage. This event is held annually in August.",
+            es: 'En el Festival Petronio Álvarez se reúnen numerosos artistas para celebrar el patrimonio musical de la región. Este evento se celebra anualmente en agosto.'
+        },
+        {
+            en: 'The World Salsa Festival is celebrated annually in Cali, bringing dance and music to the city. This event is usually held between September and December.',
+            es: 'El Festival Mundial de Salsa se celebra anualmente en Cali, llevando baile y música a la ciudad. Este evento suele realizarse entre septiembre y diciembre.'
+        },
+        {
+            en: "The Cali International Theater Festival brings performing arts to different neighborhoods in the city. Check when it will be held, as it can take place in various months.",
+            es: 'El Festival Internacional de Teatro de Cali lleva las artes escénicas a diferentes barrios de la ciudad. Consulta cuándo se realizará, ya que puede tener lugar en distintos meses.'
+        }
+    ];
+
+    const experienceSections = ['#iconic-places', '#experiences', '#events'];
+    const experienceParagraphs = experienceSections.flatMap((sectionSelector) =>
+        Array.from(document.querySelectorAll(`${sectionSelector} .slide-content p`))
+    );
+    experienceParagraphs.forEach((paragraph, index) => {
+        const description = experienceDescriptions[index];
+        if (!description) return;
+        paragraph.dataset.en = description.en;
+        paragraph.dataset.es = description.es;
+    });
+
     const applyLanguage = (lang) => {
         document.querySelectorAll('[data-en][data-es]').forEach((element) => {
             const value = element.dataset[lang];
